@@ -1,0 +1,34 @@
+
+==============================================
+Angular ClientApp
+==============================================
+
+npm install --save-dev @angular-devkit/build-angular
+npm install  @angular/compiler@8.2.14
+
+cd C:\Users\Sameer\source\repos\sports-store
+
+Get-ExecutionPolicy
+
+Set-ExecutionPolicy -ExecutionPolicy Bypass
+
+ng new SportsStore --directory SportsStore/ClientApp --routing true --style css --skip-tests true
+
+
+
+==============================================
+ASP.NET MVC ServerApp
+==============================================
+
+cd C:\Users\Sameer\source\repos\sports-store\SportsStore
+
+mkdir ServerApp
+cd ServerApp
+dotnet new globaljson --sdk-version 5.0.400
+dotnet new mvc --language C# --auth None
+
+dotnet dev-certs https --clean
+dotnet dev-certs https --trust
+dotnet watch run
+
+dotnet add package Microsoft.AspNetCore.SpaServices.Extensions --version 3.0.0
