@@ -1,10 +1,32 @@
 import { Product } from "./product.model";
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 
+const productsUrl = "/api/products";
+
+@Injectable()
 export class Repository {
-
-  constructor() {
-    this.product = JSON.parse(document.getElementById("data").textContent);
+  product: Product;
+  products: Product[];
+    
+  constructor(private http: HttpClient) {
+    this.getProducts(true);
   }
 
-  product: Product;
+  getProduct(id: number) {
+    this.http.get<Product>(`${productsUrl}/${id}`)
+      .subscribe(p => {
+        this.product = p;
+        console.log("Product Data Recieved.");
+      });
+  }
+
+  getProducts(related = false) {
+    console.log("Product Data Requested.");
+    this.http.get<Product[]>(`${productsUrl}?related=${related}`)
+      .subscribe(prods => {
+        this.products = prods;
+      });
+  }
+
 }
